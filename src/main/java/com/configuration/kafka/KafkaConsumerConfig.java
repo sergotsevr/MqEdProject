@@ -1,6 +1,6 @@
-package com.configuration;
+package com.configuration.kafka;
 
-import com.configuration.serializers.MessageDeserializer;
+import com.configuration.kafka.serializers.MessageDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

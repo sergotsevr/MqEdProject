@@ -1,4 +1,4 @@
-package com.configuration;
+package com.configuration.kafka;
 
 import lombok.Data;
 import org.apache.kafka.clients.admin.AdminClientConfig;

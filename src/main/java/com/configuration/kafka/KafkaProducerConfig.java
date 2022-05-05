@@ -1,7 +1,7 @@
-package com.configuration;
+package com.configuration.kafka;
 
-import com.configuration.serializers.MessageDeserializer;
-import com.configuration.serializers.MessageSerializer;
+import com.configuration.kafka.serializers.MessageDeserializer;
+import com.configuration.kafka.serializers.MessageSerializer;
 import com.model.Message;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

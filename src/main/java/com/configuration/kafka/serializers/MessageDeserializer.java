@@ -1,4 +1,4 @@
-package com.configuration.serializers;
+package com.configuration.kafka.serializers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.Message;
