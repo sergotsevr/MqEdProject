@@ -29,13 +29,13 @@ public class MessageDeserializer implements Deserializer<Message> {
             log.debug("Deserializing...");
             return objectMapper.readValue(new String(data, StandardCharsets.UTF_8), Message.class);
         } catch (Exception e) {
-            throw new SerializationException("Error when deserializing byte[] to MessageDto");
+            throw new SerializationException("Error when deserializing byte[] to Message" + e);
         }
     }
 
     @Override
     public Message deserialize(String topic, Headers headers, byte[] data) {
-        return Deserializer.super.deserialize(topic, headers, data);
+        return deserialize(topic, data);
     }
 
     @Override

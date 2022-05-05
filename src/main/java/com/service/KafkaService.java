@@ -3,6 +3,7 @@ package com.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.Message;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,9 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(prefix = "mq", name = "type", havingValue = "kafka")
+@Slf4j
 public class KafkaService implements QueueService{
-
-    ObjectMapper objectMapper = new ObjectMapper();
     private Message message = new Message("Init message");
 
     @Autowired
@@ -32,9 +32,8 @@ public class KafkaService implements QueueService{
 
     @KafkaListener(topics = "top", groupId = "myGroup")
     public void listenGroupFoo(Message message) {
-        System.out.println("Received Message in group foo: " + message);
+        log.info("Received Message " + message);
         this.message = message;
     }
-
 
 }

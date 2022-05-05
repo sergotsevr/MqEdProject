@@ -1,5 +1,6 @@
 package com.configuration;
 
+import com.configuration.serializers.MessageDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,7 @@ public class KafkaConsumerConfig {
                 StringDeserializer.class);
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
+                MessageDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
