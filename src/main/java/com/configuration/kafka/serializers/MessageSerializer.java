@@ -24,7 +24,7 @@ public class MessageSerializer implements Serializer<Message> {
         try {
             if (message == null){
                 log.warn("Null received at serializing");
-                return null;
+                return new byte[] {};
             }
             log.debug("Serializing...");
             return objectMapper.writeValueAsBytes(message);

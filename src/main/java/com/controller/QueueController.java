@@ -21,7 +21,7 @@ public class QueueController {
     }
 
     @PostMapping("/write")
-    public void WriteMessage(Message message){
+    public void writeMessage(Message message){
         service.writeMessage(message);
     }
 }
