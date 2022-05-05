@@ -2,5 +2,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+kafka:
+  bootstrap-servers: localhost:9092
+  topic:
+    topic: ed.topic
 mq:
-  type: "mock"
+  type: "kafka"

@@ -1,0 +1,45 @@
+package com.configuration.serializers;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model.Message;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.errors.SerializationException;
+import org.apache.kafka.common.header.Headers;
+import org.apache.kafka.common.serialization.Deserializer;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
+@Slf4j
+public class MessageDeserializer implements Deserializer<Message> {
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public void configure(Map<String, ?> configs, boolean isKey) {
+        Deserializer.super.configure(configs, isKey);
+    }
+
+    @Override
+    public Message deserialize(String s, byte[] data) {
+        try {
+            if (data == null){
+                log.warn("Null received at deserializing");
+                return null;
+            }
+            log.debug("Deserializing...");
+            return objectMapper.readValue(new String(data, StandardCharsets.UTF_8), Message.class);
+        } catch (Exception e) {
+            throw new SerializationException("Error when deserializing byte[] to MessageDto");
+        }
+    }
+
+    @Override
+    public Message deserialize(String topic, Headers headers, byte[] data) {
+        return Deserializer.super.deserialize(topic, headers, data);
+    }
+
+    @Override
+    public void close() {
+        Deserializer.super.close();
+    }
+}
