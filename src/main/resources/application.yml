@@ -4,7 +4,7 @@ spring:
       matching-strategy: ant_path_matcher
 kafka:
   bootstrap-servers: localhost:9092
-  topic:
-    topic: ed.topic
+  group: myGroup
+  topic: top
 mq:
   type: "kafka"

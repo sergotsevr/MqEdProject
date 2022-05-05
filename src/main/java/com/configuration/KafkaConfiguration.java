@@ -16,6 +16,8 @@ import java.util.Map;
 public class KafkaConfiguration {
     @Value(value = "${kafka.bootstrap-servers}")
     private String bootstrapAddress;
+    @Value(value = "${kafka.topic}")
+    private String topic;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -26,6 +28,6 @@ public class KafkaConfiguration {
 
     @Bean
     public NewTopic topic2() {
-        return new NewTopic("top", 1, (short) 1);
+        return new NewTopic(topic, 1, (short) 1);
     }
 }
