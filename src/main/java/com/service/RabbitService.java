@@ -38,8 +38,7 @@ public class RabbitService implements QueueService{
 
     @RabbitListener(queues = "queue1")
     public void processQueue1(String message) throws IOException {
-        log.info("Received from queue 1: " + message);
-        //this.message = new Message(message);
+        log.info("Received from queue: " + message);
         this.message = objectMapper.readValue(message, Message.class);
     }
 }
