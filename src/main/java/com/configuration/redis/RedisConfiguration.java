@@ -1,6 +1,8 @@
 package com.configuration.redis;
 
-import com.service.RedisReciver;
+import com.model.Message;
+import com.service.RedisReceiver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,10 +26,10 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        final RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+    public RedisTemplate<String, Message> redisTemplate() {
+        final RedisTemplate<String, Message> template = new RedisTemplate<String, Message>();
         template.setConnectionFactory(jedisConnectionFactory());
-        template.setValueSerializer(new GenericToStringSerializer<Object>(Object.class));
+        template.setValueSerializer(new GenericToStringSerializer<>(Message.class));
         return template;
     }
 
@@ -36,16 +38,12 @@ public class RedisConfiguration {
         return new ChannelTopic(UUID.randomUUID().toString());
     }
 
-    /*@Bean
-    RedisService redisPublisher() {
-        return new RedisService(redisTemplate(), topic());
-    }*/
-
     @Bean
-    RedisMessageListenerContainer redisMessageListenerContainer() {
+    @Autowired
+    RedisMessageListenerContainer redisMessageListenerContainer(RedisReceiver redisReceiver) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(jedisConnectionFactory());
-        container.addMessageListener(new MessageListenerAdapter(new RedisReciver()), topic());
+        container.addMessageListener(new MessageListenerAdapter(redisReceiver), topic());
         container.setTaskExecutor(Executors.newFixedThreadPool(4));
         return container;
     }

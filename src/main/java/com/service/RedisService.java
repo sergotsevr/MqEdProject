@@ -1,6 +1,5 @@
 package com.service;
 
-import com.configuration.rabbirmq.RabbitConfiguration;
 import com.configuration.redis.RedisConfiguration;
 import com.model.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -13,30 +12,30 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @ConditionalOnBean(RedisConfiguration.class)
-public class RedisService implements QueueService{
+public class RedisService implements QueueService {
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<String, Message> redisTemplate;
     @Autowired
     private ChannelTopic topic;
 
+    @Autowired
+    RedisReceiver redisReceiver;
+
     @Override
     public Message readMessage() {
-        return null;
+        return redisReceiver.getLastMessage();
     }
 
     @Override
     public void writeMessage(Message message) {
-        redisTemplate.convertAndSend(topic.getTopic(), message);
-        log.info("Sending to Redis message: " + message + "into the topic: " + topic.getTopic());
+        log.info("Sending to Redis message: " + message.getMessageText() + "into the topic: " + topic.getTopic());
+        redisTemplate.convertAndSend(topic.getTopic(), message.getMessageText());
     }
 
 
 
-    public RedisService(final RedisTemplate<String, Object> redisTemplate, final ChannelTopic topic) {
+    public RedisService(RedisTemplate<String, Message> redisTemplate, final ChannelTopic topic) {
         this.redisTemplate = redisTemplate;
         this.topic = topic;
-    }
-    public void publish(final String message) {
-        redisTemplate.convertAndSend(topic.getTopic(), message);
     }
 }
