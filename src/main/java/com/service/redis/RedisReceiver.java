@@ -1,4 +1,4 @@
-package com.service.Redis;
+package com.service.redis;
 
 import com.model.Message;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.configuration.redis;
 
 import com.model.Message;
-import com.service.Redis.RedisReceiver;
+import com.service.redis.RedisReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ public class RedisConfiguration {
 
     @Bean
     public RedisTemplate<String, Message> redisTemplate() {
-        final RedisTemplate<String, Message> template = new RedisTemplate<String, Message>();
+        final RedisTemplate<String, Message> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
         template.setValueSerializer(new GenericToStringSerializer<>(Message.class));
         return template;
