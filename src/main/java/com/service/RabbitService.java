@@ -1,7 +1,6 @@
 package com.service;
 
 import com.configuration.rabbirmq.RabbitConfiguration;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.Message;
 import lombok.SneakyThrows;
@@ -13,7 +12,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 @Service
 @Slf4j

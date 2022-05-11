@@ -2,12 +2,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    host: localhost
+    port: 6379
 kafka:
   bootstrap-servers: localhost:9092
   group: myGroup
   topic: top
 mq:
-  type: "rabbitmq"
+  type: "redis"
 rabbit:
   host: localhost
   queue: queue1

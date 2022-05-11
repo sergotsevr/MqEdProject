@@ -1,18 +1,18 @@
 package com.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.configuration.kafka.KafkaConfiguration;
 import com.model.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-@ConditionalOnProperty(prefix = "mq", name = "type", havingValue = "kafka")
 @Slf4j
+@ConditionalOnBean(KafkaConfiguration.class)
 public class KafkaService implements QueueService{
     private Message message = new Message("Init message");
 
