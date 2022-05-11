@@ -1,7 +1,7 @@
 package com.configuration.redis;
 
 import com.model.Message;
-import com.service.RedisReceiver;
+import com.service.Redis.RedisReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

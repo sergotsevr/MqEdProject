@@ -1,8 +1,9 @@
-package com.service;
+package com.service.rabbit;
 
 import com.configuration.rabbirmq.RabbitConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.Message;
+import com.service.QueueService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -16,7 +17,7 @@ import java.io.IOException;
 @Service
 @Slf4j
 @ConditionalOnBean(RabbitConfiguration.class)
-public class RabbitService implements QueueService{
+public class RabbitService implements QueueService {
 
     ObjectMapper objectMapper = new ObjectMapper();
     Message message = new Message("Init rabbitmq message");

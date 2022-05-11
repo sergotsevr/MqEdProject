@@ -1,8 +1,9 @@
-package com.service;
+package com.service.kafka;
 
 
 import com.configuration.kafka.KafkaConfiguration;
 import com.model.Message;
+import com.service.QueueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @ConditionalOnBean(KafkaConfiguration.class)
-public class KafkaService implements QueueService{
+public class KafkaService implements QueueService {
     private Message message = new Message("Init message");
 
     @Autowired
