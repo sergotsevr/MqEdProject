@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestPropertySource(
-        locations = "classpath:application.yml")
+        locations = "classpath:application.yml", properties = "mq.type = redis")
 public class SpeedTest {
     @Autowired
     QueueService service;
@@ -24,6 +24,7 @@ public class SpeedTest {
         Message message = prepareMessage();
         long startTime = System.currentTimeMillis();
         service.writeMessage(message);
+        service.readMessage();
         long endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) + "ms");
     }
