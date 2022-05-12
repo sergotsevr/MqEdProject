@@ -1,21 +1,13 @@
-package com.kafka;
+package com;
 
-import com.configuration.kafka.KafkaConfiguration;
 import com.model.Message;
 import com.service.QueueService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource(
-        locations = "classpath:application.yml", properties = "mq.type = redis")
-public class SpeedTest {
+public abstract class AbstractSpeedTest {
+
+    //идея ругается зря, т.к. бин создается только один в зависимости от значения проперти mq.type
     @Autowired
     QueueService service;
 
@@ -31,10 +23,5 @@ public class SpeedTest {
 
     private Message prepareMessage() {
         return new Message("Test message");
-    }
-
-    @Bean
-    KafkaConfiguration kafkaConfiguration(){
-        return new KafkaConfiguration();
     }
 }
