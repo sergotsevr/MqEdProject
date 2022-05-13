@@ -16,7 +16,7 @@ public abstract class AbstractSpeedTest {
     @Autowired
     private QueueService service;
 
-    private static final int timesToRun = 5000;
+    private static final int timesToRun = 5;
 
     private static long startTime = 0;
 
@@ -36,7 +36,7 @@ public abstract class AbstractSpeedTest {
     @AfterAll
     public static void writeStatistic() {
         long endTime = System.currentTimeMillis();
-        log.info("Total execution time: " + (startTime - endTime) + "ms");
+        log.info("Total execution time: " + (endTime - startTime) + "ms");
     }
 
     private Message prepareMessage() {
