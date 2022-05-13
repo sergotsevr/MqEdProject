@@ -4,6 +4,8 @@ import com.model.Message;
 import com.service.QueueService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,24 +15,28 @@ public abstract class AbstractSpeedTest {
     //идея ругается зря, т.к. бин создается только один в зависимости от значения проперти mq.type
     @Autowired
     private QueueService service;
-    private static long deltaTime = 0;
 
-    private static final int timesToRun = 5;
+    private static final int timesToRun = 5000;
+
+    private static long startTime = 0;
+
 
     @RepeatedTest(timesToRun)
     public void speedTest() {
         Message message = prepareMessage();
-        long startTime = System.currentTimeMillis();
         service.writeMessage(message);
-        service.readMessage();
-        long endTime = System.currentTimeMillis();
-        deltaTime += endTime - startTime;
-        log.info("One iteration execution time: " + deltaTime + "ms");
+        Message messageFromMq = service.readMessage();
+        Assertions.assertNotNull(messageFromMq);
+    }
+    @BeforeAll
+    public static void startTimer() {
+        startTime = System.currentTimeMillis();
     }
 
     @AfterAll
     public static void writeStatistic() {
-        log.info("Average execution time: " + (deltaTime / timesToRun) + "ms");
+        long endTime = System.currentTimeMillis();
+        log.info("Total execution time: " + (startTime - endTime) + "ms");
     }
 
     private Message prepareMessage() {
