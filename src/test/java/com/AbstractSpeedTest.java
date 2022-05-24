@@ -16,12 +16,12 @@ public abstract class AbstractSpeedTest {
     @Autowired
     private QueueService service;
 
-    private static final int timesToRun = 5;
+    private static final int TIMES_TO_RUN = 5;
 
     private static long startTime = 0;
 
 
-    @RepeatedTest(timesToRun)
+    @RepeatedTest(TIMES_TO_RUN)
     public void speedTest() {
         Message message = prepareMessage();
         service.writeMessage(message);
