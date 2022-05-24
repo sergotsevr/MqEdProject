@@ -19,5 +19,5 @@ rabbit:
 logging:
   level:
     org:
-      springframework: OFF
-    root: off
+      springframework: INFO
+    root: INFO
