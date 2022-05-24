@@ -12,6 +12,7 @@ import java.util.Map;
 @Slf4j
 public class MessageSerializer implements Serializer<Message> {
 
+    //созданием MessageSerializer занимается библиотека, так что заавтовайрить красиво тут не получится
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -22,9 +23,9 @@ public class MessageSerializer implements Serializer<Message> {
     @Override
     public byte[] serialize(String topic, Message message) {
         try {
-            if (message == null){
+            if (message == null) {
                 log.warn("Null received at serializing");
-                return new byte[] {};
+                return new byte[]{};
             }
             log.debug("Serializing...");
             return objectMapper.writeValueAsBytes(message);

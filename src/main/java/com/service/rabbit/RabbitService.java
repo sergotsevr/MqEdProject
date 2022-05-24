@@ -19,7 +19,8 @@ import java.io.IOException;
 @ConditionalOnBean(RabbitConfiguration.class)
 public class RabbitService implements QueueService {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
     Message message = new Message("Init rabbitmq message");
 
     @Autowired
