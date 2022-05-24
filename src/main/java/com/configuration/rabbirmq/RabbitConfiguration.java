@@ -23,9 +23,12 @@ public class RabbitConfiguration {
     @Value("${rabbit.queue}")
     private String queue = "queue1";
 
+    @Value("${rabbit.port}")
+    private int port = com.rabbitmq.client.ConnectionFactory.DEFAULT_AMQP_PORT;
+
     @Bean
     public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory(host);
+        return new CachingConnectionFactory(host, port);
     }
 
     @Bean
