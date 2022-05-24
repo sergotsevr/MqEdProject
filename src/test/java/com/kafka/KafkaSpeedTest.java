@@ -24,7 +24,7 @@ public class KafkaSpeedTest extends AbstractSpeedTest {
     public static KafkaContainer kafka;
 
     static {
-        kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
+        kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.4"));
         kafka.start();
     }
 
